@@ -1,8 +1,17 @@
 "use strict"
+let recipe = require('../models/recipe-model');
 
 // GET '/'
 function getAllRecipes(req, resp) {
-    resp.json("");
+    /*recipe.find({}, (err, data) => {
+        resp.json(data);
+    });*/
+
+    recipe.find({}).then(
+        (data) => {
+            resp.json(data);
+        }
+    );
 }
 
 // GET '/:id'
