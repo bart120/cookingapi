@@ -1,5 +1,5 @@
-var path = require("path");
-var webpack = require("webpack");
+let path = require("path");
+let webpack = require("webpack");
 
 module.exports = {
     entry: {
@@ -9,6 +9,13 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: '[name].build.js'
+    },
+    module: {
+        rules: [
+            {
+                exclude: /node_modules/
+            }
+        ]
     },
     stats: {
         colors: true
