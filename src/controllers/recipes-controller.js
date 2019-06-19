@@ -76,7 +76,10 @@ exports.updateRecipe = (req, resp) => {
         return;
     } else {
         recipe.findByIdAndUpdate(id, obj, { new: true })
-            .then(data => resp.json(data))
+            .then(data => {
+                cachegoose.clearCache('RECIPE-CACHE-KEY');
+                resp.json(data);
+            })
             .catch(err => resp.status(400).json(err));
     }
 }

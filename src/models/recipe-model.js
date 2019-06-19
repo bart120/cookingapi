@@ -1,7 +1,7 @@
-let mongoose = require('mongoose')
+let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-module.exports = mongoose.model('Recipe', new Schema({
+const schema = new Schema({
     name: {
         type: String,
         required: 'Nom obligatoire'
@@ -21,4 +21,11 @@ module.exports = mongoose.model('Recipe', new Schema({
         }],
         default: 'medium'
     }
-}));
+});
+
+schema.pre('findByIdAndUpdate', () => {
+    const update = this.getUpdate();
+    console.log(this);
+});
+
+module.exports = mongoose.model('Recipe', schema);
