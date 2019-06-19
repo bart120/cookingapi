@@ -1,5 +1,6 @@
-let users = require('../models/user-model');
-let sha1 = require('../utils/sha1');
+"use strict"
+const users = require('../models/user-model');
+const sha1 = require('../utils/sha1');
 
 // GET /
 exports.getAllUsers = (req, resp) => {
