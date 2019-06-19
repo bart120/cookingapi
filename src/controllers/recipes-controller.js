@@ -1,5 +1,9 @@
 "use strict"
-let recipe = require('../models/recipe-model');
+const recipe = require('../models/recipe-model');
+const mongoose = require('mongoose');
+const cachegoose = require('cachegoose');
+
+cachegoose(mongoose);
 
 // GET '/'
 function getAllRecipes(req, resp) {
@@ -7,13 +11,21 @@ function getAllRecipes(req, resp) {
         resp.json(data);
     });*/
 
-
-    test();
-    recipe.find({}).then(
+    // test();
+    /*recipe.find({}).then(
         (data) => {
             resp.json(data);
         }
-    );
+    );*/
+
+    recipe.find({})
+        .cache(0, 'RECIPE-CACHE-KEY')
+        .exec()
+        .then(
+            (data) => {
+                resp.json(data);
+            }
+        );
 }
 
 function traitement(resolve, reject) {
@@ -47,6 +59,7 @@ exports.createRecipe = (req, resp) => {
         .then(
             data => {
                 resp.status(201).json(data);
+                cachegoose.clearCache('RECIPE-CACHE-KEY');
             }
         ).catch(err => {
             console.log(err);
