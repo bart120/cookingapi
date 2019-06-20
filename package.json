@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --watch",
-    "test": "mocha 'test/**/*.spec.js'"
+    "test": "mocha 'test/**/*.spec.js'",
+    "start": "node ./src/app.js"
   },
   "repository": {
     "type": "git",
