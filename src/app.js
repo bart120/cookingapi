@@ -7,6 +7,11 @@ let bodyParser = require('body-parser');
 let recipesRoutesMid = require('./routes/recipes-routes');
 let usersRoutesMid = require('./routes/users-routes');
 
+let authController = require('./controllers/authentication-controller');
+
+//auth
+let auth = require('./utils/validate-token');
+
 //conf
 let conf = require('./configurations/config-mongo');
 
@@ -18,8 +23,12 @@ mongoose.connect(conf.database);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use('/api', auth.validateToken);
+
 app.use('/api/recipes', recipesRoutesMid);
-app.use('/api/users', usersRoutesMid)
+app.use('/api/users', usersRoutesMid);
+
+app.post('/authentication', authController);
 
 
 app.get('/', (req, resp) => {
