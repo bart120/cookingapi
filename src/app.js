@@ -7,6 +7,8 @@ let bodyParser = require('body-parser');
 let recipesRoutesMid = require('./routes/recipes-routes');
 let usersRoutesMid = require('./routes/users-routes');
 
+let cors = require('cors');
+
 let authController = require('./controllers/authentication-controller');
 
 //auth
@@ -16,6 +18,8 @@ let auth = require('./utils/validate-token');
 let conf = require('./configurations/config-mongo');
 
 let app = express();
+
+app.use(cors());
 
 mongoose.connect(conf.database);
 // mongoose.Promise = global.Promise; V4
