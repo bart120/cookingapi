@@ -37,13 +37,13 @@ app.post('/authentication', authController);
 
 app.get('/', (req, resp) => {
 
-    resp.json({ name: "toto" });
+    resp.write('OK');
 });
 
 
 
 
-app.listen(8888);
+app.listen(8080);
 module.exports = app;
 
 
